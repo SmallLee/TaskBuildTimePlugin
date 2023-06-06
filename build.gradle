@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            // 本地仓库地址
+            url '/Users/admin/Downloads/apache-maven-3.9.0/repo'
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        // 自定义插件时指定的groupId:artifactId:version
+        classpath 'com.example:taskbuildtimeplugin:1.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            // 本地仓库地址
+            url '/Users/admin/Downloads/apache-maven-3.9.0/repo'
+        }
+    }
+}

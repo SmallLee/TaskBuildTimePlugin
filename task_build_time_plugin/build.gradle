@@ -1,0 +1,34 @@
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+}
+
+dependencies {
+
+    // groovy sdk
+    implementation localGroovy()
+    // gradle sdk
+    implementation gradleApi()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.example'
+            artifactId = 'taskbuildtimeplugin'
+            version = '1.0.0'
+            // 一定要声明，否则不生成jar包，外部通过apply plugin:引用该插件会报找不到的错
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            // 本地仓库地址
+            url '/Users/admin/Downloads/apache-maven-3.9.0/repo'
+        }
+    }
+}
+
+
+
