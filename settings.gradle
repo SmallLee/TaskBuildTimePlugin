@@ -1,2 +1,3 @@
 include ':app'
 include ':task_build_time_plugin'
+include ':java-lib'

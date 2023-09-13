@@ -2,17 +2,22 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven {
-            // 本地仓库地址
+        /*maven {
+            // Local warehouse address
             url '/Users/admin/Downloads/apache-maven-3.9.0/repo'
+        }*/
+        maven {
+            url "http://localhost:8081/nexus/content/groups/public/"
+            //url "http://nexus.zhenrongbao.com/nexus/content/groups/public/"
         }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
-        // 自定义插件时指定的groupId:artifactId:version
-        classpath 'com.example:taskbuildtimeplugin:1.0.0'
+        classpath 'com.android.tools.build:gradle:4.1.3'
+        // The groupId:artifactId:version specified when customizing the plugin
+        //classpath 'com.example:taskbuildtimeplugin:1.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
+         classpath "com.module:aabresguard-plugin:0.1.9-SNAPSHOT"
     }
 }
 
@@ -20,9 +25,13 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            // 本地仓库地址
+        /*maven {
+            // Local warehouse address
             url '/Users/admin/Downloads/apache-maven-3.9.0/repo'
+        }*/
+        maven {
+            url "http://localhost:8081/nexus/content/groups/public/"
+            // url "http://nexus.zhenrongbao.com/nexus/content/groups/public/"
         }
     }
 }

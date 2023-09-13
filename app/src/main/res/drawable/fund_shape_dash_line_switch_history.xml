@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:left="-400dp" android:right="-400dp">
+        <rotate
+            android:drawable="@drawable/fund_shape_dash_line_switch_history_horizontal"
+            android:fromDegrees="90" />
+    </item>
+
+</layer-list>
