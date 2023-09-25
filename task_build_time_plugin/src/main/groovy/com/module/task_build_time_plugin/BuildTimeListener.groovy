@@ -40,7 +40,9 @@ class BuildTimeListener implements TaskExecutionListener, BuildListener {
     @Override
     void buildFinished(BuildResult buildResult) {
         println "-------build finished, now println all task execution time-------"
-        taskTimeMap.each { k, v -> println "${k}:[${v.total}ms]" }
+        taskTimeMap.sort { a, b ->
+            b.value.total <=> a.value.total
+        }.each { k, v -> println "Task ${k} take [${v.total}ms]" }
         println "-----------------------------------------------------------------"
     }
 

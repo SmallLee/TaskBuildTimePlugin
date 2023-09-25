@@ -2,34 +2,34 @@
 <metadata modelVersion="1.1.0">
   <groupId>com.module</groupId>
   <artifactId>taskBuildTime</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20230925.072000</timestamp>
+      <timestamp>20230925.074517</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20230925072000</lastUpdated>
+    <lastUpdated>20230925074517</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <classifier>sources</classifier>
         <extension>jar</extension>
-        <value>1.0.0-20230925.072000-1</value>
-        <updated>20230925072000</updated>
+        <value>0.0.3-20230925.074517-1</value>
+        <updated>20230925074517</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.0.0-20230925.072000-1</value>
-        <updated>20230925072000</updated>
+        <value>0.0.3-20230925.074517-1</value>
+        <updated>20230925074517</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0.0-20230925.072000-1</value>
-        <updated>20230925072000</updated>
+        <value>0.0.3-20230925.074517-1</value>
+        <updated>20230925074517</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>module</extension>
-        <value>1.0.0-20230925.072000-1</value>
-        <updated>20230925072000</updated>
+        <value>0.0.3-20230925.074517-1</value>
+        <updated>20230925074517</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
