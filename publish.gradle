@@ -1,0 +1,97 @@
+apply plugin: 'maven-publish'
+
+tasks.register('sourceJar', Jar) {
+    if (PACKING == 'jar') {
+        from sourceSets.main.allJava
+    } else {
+        from android.sourceSets.main.java.srcDirs
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId = GROUP_ID
+                artifactId = ARTIFACT_ID
+                if (IS_SNAPSHOT.toBoolean()) {
+                    version = VERSION_NAME + "-SNAPSHOT"
+                } else {
+                    version = VERSION_NAME
+                }
+                if (PACKING == 'jar') {
+                    from components.java
+                    artifact sourceJar {
+                        classifier "sources"
+                    }
+                } else {
+                    artifact "$buildDir/outputs/aar/${project.name}-release.aar"
+                    pom.withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+
+                        def scopes = [configurations.compile]
+                        if (configurations.hasProperty("api")) {
+                            scopes.add(configurations.api)
+                        }
+                        if (configurations.hasProperty("implementation")) {
+                            scopes.add(configurations.implementation)
+                        }
+                        if (configurations.hasProperty("debugImplementation")) {
+                            scopes.add(configurations.debugImplementation)
+                        }
+                        if (configurations.hasProperty("releaseImplementation")) {
+                            scopes.add(configurations.releaseImplementation)
+                        }
+                        scopes.each { scope ->
+                            scope.allDependencies.each {
+                                if (it instanceof ModuleDependency) {
+                                    boolean isTransitive = ((ModuleDependency) it).transitive
+                                    if (!isTransitive) {
+                                        println "<<<< not transitive dependency: [${it.group}, ${it.name}, ${it.version}]"
+                                        return
+                                    }
+                                }
+
+                                if (it.group == "${project.rootProject.name}.libs" || it.version == 'unspecified') {
+                                    return
+                                }
+
+                                if (it.group && it.name && it.version) {
+                                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                                    dependencyNode.appendNode('groupId', it.group)
+                                    dependencyNode.appendNode('artifactId', it.name)
+                                    dependencyNode.appendNode('version', it.version)
+                                    dependencyNode.appendNode('scope', scope.name)
+                                }
+                            }
+                        }
+                    }
+                }
+                repositories {
+                    maven {
+                        allowInsecureProtocol = true
+                        println('-----------> IS_LOCAL ' + IS_LOCAL + " IS_SNAPSHOT " + IS_SNAPSHOT)
+                        if (IS_LOCAL.toBoolean()) {
+                            if (IS_SNAPSHOT.toBoolean()) {
+                                url = "http://localhost:8081/nexus/content/repositories/snapshots"
+                            } else {
+                                url = "http://localhost:8081/nexus/content/repositories/releases"
+                            }
+                        } else {
+                            url = "https://repository.surfin.sg/repository/maven-private"
+                        }
+                        credentials {
+                            if (IS_LOCAL.toBoolean()) {
+                                username 'admin'
+                                password 'admin123'
+                            } else {
+                                username 'public_app_user'
+                                password '^@Ds*aRe@FkjvcnV'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

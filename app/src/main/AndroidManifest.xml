@@ -14,7 +14,7 @@
         android:theme="@style/Theme.TaskBuildTimeDemo"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.module.taskbuildtimedemo.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>

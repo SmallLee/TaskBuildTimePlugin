@@ -1,34 +1,13 @@
 plugins {
     id 'groovy'
-    id 'maven-publish'
 }
-
+apply from: rootProject.file('publish.gradle')
 dependencies {
 
     // groovy sdk
     implementation localGroovy()
     // gradle sdk
     implementation gradleApi()
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'com.example'
-            artifactId = 'taskbuildtimeplugin'
-            version = '1.0.0'
-            // Be sure to declare, otherwise no jar package will be generated,
-            // externally through apply plugin: referencing the plugin will report an error that cannot be found
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            // Local warehouse address
-            url '/Users/admin/Downloads/apache-maven-3.9.0/repo'
-        }
-    }
 }
 
 
